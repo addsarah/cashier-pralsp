@@ -9,12 +9,13 @@
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="image">
-        <img src="{{ asset("/admin/dist/img/user2-160x160.jpg") }}" class="img-circle elevation-2" alt="User Image">
-      </div>
       <div class="info">
         @if(Auth::check())
         <span class="hidden-xs">{{ Auth::user()->name}}</span>
+        @endif
+        <br>
+        @if (Auth::check())
+            <span class="hidden-xs">{{ Auth::user()->email }}</span>
         @endif
       </div>
     </div>
@@ -78,29 +79,6 @@
         </li>
         <li class="nav-item menu-close">
           <a href="{{ url("#") }}" class="nav-link">
-            <i class="fas fa-dollar-sign nav-icon"></i>
-            <p>
-              Transaksi
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{ url("./index.html") }}" class="nav-link">
-                <i class="fas fa-shopping-basket nav-icon"></i>
-                <p>Keranjang</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ url("./index2.html") }}" class="nav-link">
-                <i class="fas fa-money-bill nav-icon"></i>
-                <p>Pembayaran</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item menu-close">
-          <a href="{{ url("#") }}" class="nav-link">
             <i class="fas fa-file nav-icon"></i>
             <p>
               Laporan
@@ -115,6 +93,15 @@
               </a>
             </li>
           </ul>
+        </li>
+        <li class="nav-item">
+          <form method="POST" action="{{ route('logout') }}" class="nav-link">
+              @csrf
+              <button type="submit" class="btn btn-link">
+                  <i class="fa fa-power-off"></i>
+                  {{ __('Log Out') }}
+              </button>
+          </form>
         </li>
       </ul>
     </nav>
